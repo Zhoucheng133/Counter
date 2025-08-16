@@ -1,5 +1,9 @@
 import sqlite3
 from fastapi import FastAPI
+from fastapi.responses import JSONResponse
+from starlette.requests import Request
+
+cookie="Input your cookie HERE"
 
 class Counter:
     def __init__(self) -> None:
@@ -48,6 +52,18 @@ class Counter:
 
 app = FastAPI()
 counter=Counter()
+
+@app.middleware("http")
+async def check_cookie(request: Request, call_next):
+    cookie_value = request.headers.get("Cookie")
+    if cookie_value != cookie:
+        return JSONResponse(
+            status_code=403,
+            content={"detail": "Invalid cookie"}
+        )
+
+    response = await call_next(request)
+    return response
 
 @app.post("/add")
 def add():
