@@ -12,3 +12,22 @@
 
 ![POST](https://img.shields.io/badge//clear-POST-yellow)  
 计数器清零
+
+## 使用
+
+安装依赖
+```bash
+# 如果你使用的是Windows系统
+pip install -r requirements.txt
+# 如果你使用的是macOS系统
+pip3 install -r requirements.txt
+# 如果你使用的是Linux系统
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+```
+
+使用uvicorn运行
+```bash
+uvicorn app:app --host 0.0.0.0 --port 8080 --log-level critical
+```
