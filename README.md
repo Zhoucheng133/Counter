@@ -31,3 +31,19 @@ pip3 install -r requirements.txt
 ```bash
 uvicorn app:app --host 0.0.0.0 --port 8080 --log-level critical
 ```
+
+## 使用Docker
+
+1. 复制文件至服务器
+2. 使用命令生成镜像：
+   ```bash
+   sudo docker build -t counter <项目位置>
+   ```
+3. 使用命令生成容器
+   ```bash
+   sudo docker run -d \
+   --restart always \
+   -p <主机端口>:8000 \
+   -v <主机数据库路径>:/app/db \
+   --name counter counter
+   ```
